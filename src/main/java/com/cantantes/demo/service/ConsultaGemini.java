@@ -29,7 +29,7 @@ public class ConsultaGemini {
 
     public static String obtenerNombreCantante(String aliasCantante){
         String modelo = "gemini-2.0-flash-lite";
-        String prompt = "Dime el nombre real público de: " + aliasCantante + "(SOLO RESPONDE EL NOMBRE REAL, POR EJEMPLO {MAURO LOMBARDO}. Si algún dato no está disponible, indícalo.";
+        String prompt = "Proporciona ÚNICAMENTE el nombre real completo (nombre y apellidos) de este artista musical: " + aliasCantante + ". Responde solo con el nombre real, sin explicaciones adicionales. Si el dato no está disponible públicamente, responde exactamente con: 'Nombre no disponible públicamente'.";
 
         Client cliente = new Client.Builder().apiKey(apiKey).build();
 
@@ -48,25 +48,36 @@ public class ConsultaGemini {
         return null;
     }
 
-    public static String obtenerEdad(String aliasCantante){
+    public static String obtenerEdad(String aliasCantante) {
         String modelo = "gemini-2.0-flash-lite";
-        String prompt = "Dime la edad real pública de: " + aliasCantante + "(RESPONDE SOLO CON LA EDAD, ES DECIR EL NUMERO POR EJEMPLO {34}. Si algún dato no está disponible, indícalo.";
+        String prompt = "Dime ÚNICAMENTE el número de edad actual de " + aliasCantante + " sin texto adicional. " +
+                "Responde solo con el número, por ejemplo: 34. No incluyas palabras, símbolos ni puntuación.";
 
         Client cliente = new Client.Builder().apiKey(apiKey).build();
 
-        try{
+        try {
             GenerateContentResponse respuesta = cliente.models.generateContent(
                     modelo,
                     prompt,
                     null
             );
-            if (!respuesta.text().isEmpty()){
-                return respuesta.text();
+
+            if (!respuesta.text().isEmpty()) {
+                String texto = respuesta.text().trim();
+                if (texto.matches("\\d+")) {
+                    return texto;
+                } else {
+                    String soloNumeros = texto.replaceAll("[^0-9]", "");
+                    if (!soloNumeros.isEmpty()) {
+                        return soloNumeros;
+                    }
+                }
+                return texto;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("Error al llamar a la API de Gemini para obtener la edad del cantante: " + e.getMessage());
         }
-        return null;
+        return "0";
     }
 
     public static String obtenerNacionalidad(String aliasCantante){

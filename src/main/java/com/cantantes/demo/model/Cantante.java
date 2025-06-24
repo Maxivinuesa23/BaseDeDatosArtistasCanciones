@@ -15,7 +15,7 @@ public class Cantante {
     private Long id;
     private String nombre;
     private String alias;
-    private int edad;
+    private Integer edad;
     private String nacionalidad;
     private String biografia;
 
