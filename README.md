@@ -5,7 +5,7 @@ El proyecto consiste en una aplicación Java que permite buscar información sob
 ## Tabla de contenidos
 
 - [Caracteristicas](#caracteristicas)
-- [Instalación](#instalacion)
+- [Instalacion](#instalacion)
 - [Uso](#uso)
 - [Contacto](#contacto)
 
@@ -15,11 +15,11 @@ El proyecto consiste en una aplicación Java que permite buscar información sob
 - 🚀 Despliegue sencillo.
 - 📦 Modular y extensible.
 
-## Instalación
+## Instalacion
 
 1. **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/Maxivinuesa23/BaseDeDatosArtistasCanciones.git](https://github.com/Maxivinuesa23/BaseDeDatosArtistasCanciones.git)
+    git clone https://github.com/Maxivinuesa23/BaseDeDatosArtistasCanciones.git
     ```
    
 
